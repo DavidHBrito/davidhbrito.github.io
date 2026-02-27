@@ -1,1 +1,52 @@
-<h1>Test</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Unstoppable Pomodoro</title>
+    <style>
+        body { text-align: center; font-family: sans-serif; padding-top: 50px; }
+        #timer { font-size: 80px; margin-bottom: 20px; }
+        
+        /* This is the magic part */
+        #pause-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute; /* Allows it to move anywhere */
+            transition: 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Don't Even Try to Pause</h1>
+    <div id="timer">25:00</div>
+    
+    <button id="pause-btn">Pause Timer</button>
+
+    <script>
+        const btn = document.getElementById('pause-btn');
+
+        // Function to move the button to a random spot
+        btn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - btn.clientWidth);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        });
+
+        // Basic Timer Logic
+        let seconds = 1500;
+        const timerDisplay = document.getElementById('timer');
+
+        setInterval(() => {
+            if (seconds > 0) {
+                seconds--;
+                let mins = Math.floor(seconds / 60);
+                let secs = seconds % 60;
+                timerDisplay.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
